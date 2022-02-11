@@ -1,5 +1,10 @@
 const fs = require("fs");
 
+let buffer = fs.readFileSync(__dirname + "/input");
+const directions = buffer
+  .toString()
+  .split("\n")
+  .filter((n) => n.length);
 
 
 // What do you get if you multiply your final horizontal position by your final depth?
@@ -24,6 +29,8 @@ const move = (directions) => {
     return horizontal * depth;
   };
 
+
+// What do you get if you multiply your final horizontal position by your final depth? Part 2
 const movebyaim = (directions) => {
   let horizontal = 0;
   let depth = 0;
@@ -47,11 +54,6 @@ const movebyaim = (directions) => {
   return horizontal * depth;
 };
 
-let buffer = fs.readFileSync(__dirname + "/input");
-const directions = buffer
-  .toString()
-  .split("\n")
-  .filter((n) => n.length);
 
-console.log(move(directions));
-console.log(movebyaim(directions));
+console.log("What do you get if you multiply your final horizontal position by your final depth? Part 1 ====> " +move(directions));
+console.log("What do you get if you multiply your final horizontal position by your final depth? Part 2 ====>  " +movebyaim(directions));

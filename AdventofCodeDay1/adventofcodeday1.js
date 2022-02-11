@@ -1,5 +1,15 @@
 const fs = require('fs');
 
+let buffer = fs.readFileSync(__dirname + '/input');
+
+console.log(buffer);
+const numbers = buffer
+  .toString()
+  .split('\n')
+  .filter(n => n.length)
+  .map(n => parseInt(n));
+
+
 
 //the number of times a depth measurement increases
 const getIncreased = (depths) => {
@@ -23,16 +33,8 @@ const getIncreasedbysumof3 = (depths) => {
     return increasedCounts;
 }
 
-let buffer = fs.readFileSync(__dirname + '/input');
-
-console.log(buffer);
-const numbers = buffer
-  .toString()
-  .split('\n')
-  .filter(n => n.length)
-  .map(n => parseInt(n));
 
 
 console.log(numbers);
-console.log(getIncreased(numbers));
-console.log(getIncreasedbysumof3(numbers));
+console.log("the number of times a depth measurement increases" +getIncreased(numbers));
+console.log("How many sums are larger than the previous sum?  " +getIncreasedbysumof3(numbers));

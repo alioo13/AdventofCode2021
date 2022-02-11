@@ -1,7 +1,15 @@
 const fs = require("fs");
 
+
+let buffer = fs.readFileSync(__dirname + "/input");
+const numbers = buffer
+  .toString()
+  .split("\n")
+  .filter((n) => n.length);
+
+
 // What is the power consumption of the submarine?
-const powerConsumption1 = (numbers) => {
+const powerConsumption = (numbers) => {
     const length = numbers[0].length-1;
     let gamma = Array(length).fill(0);
     // console.log(gamma)
@@ -27,7 +35,7 @@ const powerConsumption1 = (numbers) => {
 
 
 //   What is the life support rating of the submarine?
-const powerConsumption = (numbers) => {
+const powerConsumption1 = (numbers) => {
   const length = numbers[0].length;
   let gamma = Array(length).fill(0);
   for (let i = 0; i < numbers.length; i++) {
@@ -49,7 +57,7 @@ const lifeSupport = (numbers) => {
   let oxygen = [...numbers];
   let co2 = [...numbers];
 
-  let [gamma, epsilon] = powerConsumption(oxygen);
+  let [gamma, epsilon] = powerConsumption1(oxygen);
   for (let i = 0; i < gamma.length; i++) {
     let numbersFiltered = [];
     for (let j = 0; j < oxygen.length; j++) {
@@ -61,10 +69,10 @@ const lifeSupport = (numbers) => {
     if (oxygen.length === 1) {
       break;
     }
-    [gamma, epsilon] = powerConsumption(oxygen);
+    [gamma, epsilon] = powerConsumption1(oxygen);
   }
 
-  [gamma, epsilon] = powerConsumption(co2);
+  [gamma, epsilon] = powerConsumption1(co2);
   for (let i = 0; i < epsilon.length; i++) {
     let numbersFiltered = [];
     for (let j = 0; j < co2.length; j++) {
@@ -76,19 +84,13 @@ const lifeSupport = (numbers) => {
     if (co2.length === 1) {
       break;
     }
-    [gamma, epsilon] = powerConsumption(co2);
+    [gamma, epsilon] = powerConsumption1(co2);
   }
 
   return parseInt(oxygen, 2) * parseInt(co2, 2);
 };
 
-let buffer = fs.readFileSync(__dirname + "/input");
-const numbers = buffer
-  .toString()
-  .split("\n")
-  .filter((n) => n.length);
-
 
 console.log("What is the life support rating of the submarine ? ===> " +lifeSupport(numbers));
 
-console.log("What is the power consumption of the submarine ? ===> " +powerConsumption1(numbers));
+console.log("What is the power consumption of the submarine ? ===> " +powerConsumption(numbers));
